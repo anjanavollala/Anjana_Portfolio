@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjana Vollala — Software Engineer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap');
+:root{--bg:#111315;--surface:#080f1c;--card:rgba(255,255,255,0.032);--border:rgba(255,255,255,0.07);--b2:rgba(56,189,248,0.2);--a:#38bdf8;--a2:#818cf8;--a3:#34d399;--text:#dde8f4;--muted:#4d6a88;--w:#fff;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Cabinet Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
+a{text-decoration:none;color:inherit;}
+strong{font-weight:700;color:var(--text);}
+/* CURSOR */
+#cur{width:8px;height:8px;background:var(--a);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;}
+#ring{width:32px;height:32px;border:1.5px solid rgba(56,189,248,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width .2s,height .2s,border-color .2s;}
+/* PARTICLES */
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(4,8,15,.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:padding .3s;}
+nav.sc{padding:.85rem 4rem;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--w);letter-spacing:.04em;}
+.logo span{color:var(--a);}
+.nls{display:flex;gap:2.5rem;list-style:none;}
+.nls a{font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.1em;color:var(--muted);transition:color .2s;position:relative;}
+.nls a::after{content:'';position:absolute;bottom:-3px;left:0;width:100%;height:1px;background:var(--a);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.nls a:hover,.nls a.act{color:var(--a);}
+.nls a:hover::after,.nls a.act::after{transform:scaleX(1);}
+.nr{display:flex;gap:.8rem;align-items:center;}
+.bres{font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.08em;padding:.45rem 1rem;border:1px solid var(--a3);color:var(--a3);border-radius:3px;transition:all .2s;}
+.bres:hover{background:var(--a3);color:var(--bg);}
+.bcta{font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.08em;padding:.45rem 1rem;border:1px solid var(--a);color:var(--a);border-radius:3px;transition:all .2s;}
+.bcta:hover{background:var(--a);color:var(--bg);}
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9rem 4rem 5rem;position:relative;overflow:hidden;z-index:1;}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.018) 1px,transparent 1px);background-size:70px 70px;pointer-events:none;}
+.o1{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.07) 0%,transparent 65%);top:-300px;right:-200px;pointer-events:none;animation:of 8s ease-in-out infinite;}
+.o2{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.055) 0%,transparent 65%);bottom:-200px;left:0;pointer-events:none;animation:of 10s ease-in-out infinite reverse;}
+@keyframes of{0%,100%{transform:translateY(0);}50%{transform:translateY(-30px);}}
+.hey{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--a);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;opacity:0;animation:fu .6s .15s forwards;}
+.hey::before{content:'';width:30px;height:1px;background:var(--a);}
+.hn{font-family:'Syne',sans-serif;font-size:clamp(3.8rem,8.5vw,7.5rem);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--w);opacity:0;animation:fu .7s .3s forwards;}
+.hn .ol{display:block;-webkit-text-stroke:1.5px rgba(56,189,248,.35);color:transparent;}
+.hn .ol .ad{color:var(--a);-webkit-text-stroke:0;}
+.tw{display:flex;align-items:center;gap:.6rem;margin-top:1.8rem;font-size:clamp(1rem,2vw,1.3rem);font-weight:300;color:var(--muted);opacity:0;animation:fu .7s .45s forwards;}
+#tel{color:var(--a);font-weight:500;border-right:2px solid var(--a);padding-right:3px;white-space:nowrap;overflow:hidden;}
+.hs{font-size:1rem;color:var(--muted);max-width:520px;margin-top:1.2rem;line-height:1.85;opacity:0;animation:fu .7s .6s forwards;}
+.hb{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;opacity:0;animation:fu .7s .75s forwards;}
+.bp{font-family:'DM Mono',monospace;font-size:.82rem;letter-spacing:.08em;padding:.9rem 2rem;border-radius:4px;background:var(--a);color:var(--bg);font-weight:500;transition:all .25s;}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(56,189,248,.35);}
+.bo{font-family:'DM Mono',monospace;font-size:.82rem;letter-spacing:.08em;padding:.9rem 2rem;border-radius:4px;border:1px solid var(--border);color:var(--muted);transition:all .25s;}
+.bo:hover{border-color:var(--a);color:var(--a);}
+.bg{font-family:'DM Mono',monospace;font-size:.82rem;letter-spacing:.08em;padding:.9rem 2rem;border-radius:4px;border:1px solid var(--a3);color:var(--a3);transition:all .25s;}
+.bg:hover{background:var(--a3);color:var(--bg);transform:translateY(-2px);}
+.hst{display:flex;gap:0;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border);flex-wrap:wrap;opacity:0;animation:fu .7s .9s forwards;}
+.stat{padding:0 3rem 0 0;border-right:1px solid var(--border);}
+.stat:first-child{padding-left:0;}
+.stat:last-child{border-right:none;}
+.stat+.stat{padding-left:3rem;}
+.sn{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:var(--w);line-height:1;}
+.sn .ac{color:var(--a);}
+.sl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;}
+.si{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fu .6s 1.4s forwards;}
+.sil{width:1px;height:50px;background:linear-gradient(to bottom,transparent,var(--a));animation:sp 1.8s infinite;}
+.sit{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;}
+@keyframes sp{0%,100%{opacity:.3;}50%{opacity:1;}}
+/* SECTIONS */
+.sec{padding:8rem 4rem;position:relative;z-index:1;}
+.sec-alt{background:var(--surface);}
+.sh{display:flex;align-items:center;gap:1rem;margin-bottom:4rem;}
+.se{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--a);letter-spacing:.15em;}
+.st{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:var(--w);letter-spacing:-.02em;}
+.sl2{flex:1;height:1px;background:var(--border);max-width:180px;}
+/* ABOUT */
+.ag{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start;}
+.ap{font-size:.97rem;line-height:1.9;color:var(--muted);margin-bottom:1.1rem;}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.8rem;}
+.chip{font-family:'DM Mono',monospace;font-size:.68rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);color:var(--muted);transition:all .2s;cursor:default;}
+.chip:hover{border-color:var(--a);color:var(--a);}
+.chip.hi{border-color:rgba(56,189,248,.3);color:var(--a);background:rgba(56,189,248,.06);}
+.chip.go{border-color:rgba(52,211,153,.3);color:var(--a3);background:rgba(52,211,153,.06);}
+/* RADAR */
+.rw{display:flex;flex-direction:column;align-items:center;}
+.rl{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .8rem;margin-top:1.5rem;width:100%;}
+.rli{display:flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);}
+.rld{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+/* TIMELINE */
+.tl{position:relative;padding-left:2rem;}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--a),rgba(56,189,248,.1));}
+.tli{position:relative;padding:2.5rem 0 2.5rem 3.5rem;border-bottom:1px solid var(--border);}
+.tli:last-child{border-bottom:none;}
+.tld{position:absolute;left:-2rem;top:2.9rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--a);transform:translateX(-50%);transition:all .3s;}
+.tli:hover .tld,.tld.act{background:var(--a);box-shadow:0 0 16px var(--a);}
+.tlh{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem;}
+.tlc{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--w);}
+.tlp{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--a);letter-spacing:.06em;padding:.25rem .7rem;border:1px solid rgba(56,189,248,.2);border-radius:3px;white-space:nowrap;}
+.tlr{font-size:.92rem;color:var(--muted);margin-bottom:1.5rem;}
+.tlb{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.tlb li{font-size:.9rem;color:var(--muted);line-height:1.7;padding-left:1.4rem;position:relative;}
+.tlb li::before{content:'▸';position:absolute;left:0;color:var(--a);font-size:.75rem;}
+.mr{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem;}
+.mp{font-family:'DM Mono',monospace;font-size:.68rem;padding:.3rem .85rem;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);border-radius:50px;color:var(--text);}
+.mp .v{color:var(--a);font-weight:500;}
+/* PROJECTS */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+/* Flip cards */
+.fc{height:320px;perspective:1000px;cursor:pointer;}
+.fi{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.4,0,.2,1);}
+.fc:hover .fi{transform:rotateY(180deg);}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:6px;padding:1.8rem;border:1px solid var(--border);}
+.ff{background:var(--card);backdrop-filter:blur(10px);}
+.fb{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(129,140,248,.08));border-color:var(--b2);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:space-between;}
+.fic{font-size:1.6rem;margin-bottom:1rem;}
+.ftg{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--a);margin-bottom:.4rem;}
+.fnm{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--w);margin-bottom:.6rem;}
+.fhi{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);margin-top:auto;display:flex;align-items:center;gap:.4rem;letter-spacing:.06em;}
+.fhi::after{content:'→';color:var(--a);}
+.fds{font-size:.83rem;color:var(--muted);line-height:1.6;margin-bottom:.8rem;}
+.fst{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem;}
+.tg{font-family:'DM Mono',monospace;font-size:.62rem;padding:.2rem .5rem;border-radius:2px;}
+.ts{background:rgba(30,90,200,.2);color:#60a5fa;}
+.ai{background:rgba(56,189,248,.1);color:var(--a);}
+.te{background:rgba(244,114,182,.1);color:#f472b6;}
+.gr{background:rgba(52,211,153,.1);color:var(--a3);}
+.df{background:rgba(255,255,255,.06);color:var(--muted);}
+.ghl{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--a);letter-spacing:.06em;transition:opacity .2s;}
+.ghl:hover{opacity:.7;}
+/* Featured project */
+.pf{grid-column:span 2;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:2rem;backdrop-filter:blur(10px);transition:border-color .3s,transform .3s;position:relative;overflow:hidden;}
+.pf::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a),var(--a2));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.pf:hover{border-color:rgba(56,189,248,.25);transform:translateY(-3px);}
+.pf:hover::before{transform:scaleX(1);}
+/* AI BANNER */
+.aib{background:linear-gradient(135deg,rgba(8,15,28,.9) 0%,rgba(129,140,248,.05) 50%,rgba(8,15,28,.9) 100%);border:1px solid rgba(129,140,248,.2);border-radius:10px;padding:4rem;position:relative;overflow:hidden;backdrop-filter:blur(16px);}
+.aib::before{content:'';position:absolute;top:-40%;right:-5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.07) 0%,transparent 70%);pointer-events:none;}
+.abl{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);margin-bottom:1rem;}
+.abt{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--w);max-width:620px;line-height:1.15;margin-bottom:1.2rem;}
+.abd{font-size:.97rem;color:var(--muted);max-width:560px;line-height:1.8;margin-bottom:2.5rem;}
+.aic{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.acp{padding:1.3rem;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:5px;transition:border-color .2s,transform .2s;}
+.acp:hover{border-color:rgba(129,140,248,.3);transform:translateY(-3px);}
+.acpi{font-size:1.5rem;margin-bottom:.7rem;}
+.acpt{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;color:var(--w);margin-bottom:.4rem;}
+.acpd{font-size:.8rem;color:var(--muted);line-height:1.55;}
+/* SKILLS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+.sk{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:6px;transition:all .3s;text-align:center;}
+.sk:hover{border-color:var(--b2);transform:translateY(-4px);background:rgba(56,189,248,.03);}
+.sr{width:80px;height:80px;margin:0 auto .8rem;position:relative;}
+.sr svg{width:80px;height:80px;transform:rotate(-90deg);}
+.srbg{fill:none;stroke:rgba(255,255,255,.05);stroke-width:6;}
+.srf{fill:none;stroke-width:6;stroke-linecap:round;stroke-dasharray:226;stroke-dashoffset:226;transition:stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1);}
+.srv{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--w);}
+.skn{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--text);letter-spacing:.05em;margin-bottom:.2rem;}
+.skc{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.08em;}
+/* TESTING */
+.teg{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+.tp{font-size:.9rem;color:var(--muted);line-height:1.85;margin-bottom:1rem;}
+.fw{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.3rem;background:var(--card);border:1px solid var(--border);border-radius:5px;margin-bottom:.8rem;transition:border-color .2s;}
+.fw:hover{border-color:var(--b2);}
+.fwi{font-size:1.25rem;}
+.fwn{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;color:var(--w);}
+.fwd{font-size:.8rem;color:var(--muted);}
+.sp{padding-left:1.5rem;border-left:2px solid var(--border);margin-bottom:1.8rem;transition:border-color .25s;}
+.sp:hover{border-left-color:var(--a);}
+.spn{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--a);letter-spacing:.1em;margin-bottom:.35rem;}
+.spt{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--w);margin-bottom:.5rem;}
+.spd{font-size:.85rem;color:var(--muted);line-height:1.65;}
+/* EDU */
+.eg{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem;}
+.ec{padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:6px;backdrop-filter:blur(10px);transition:all .3s;position:relative;overflow:hidden;}
+.ec::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a),var(--a2));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.ec:hover{border-color:var(--b2);transform:translateY(-3px);}
+.ec:hover::after{transform:scaleX(1);}
+.es{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--w);margin-bottom:.3rem;}
+.ed{font-size:.9rem;color:var(--muted);margin-bottom:.5rem;}
+.ep{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--a);letter-spacing:.08em;}
+.certs{display:flex;flex-wrap:wrap;gap:.8rem;}
+.cert{font-family:'DM Mono',monospace;font-size:.7rem;padding:.45rem 1rem;border:1px solid var(--border);border-radius:50px;color:var(--muted);letter-spacing:.05em;transition:all .2s;}
+.cert:hover{border-color:var(--a2);color:var(--a2);}
+/* CONTACT */
+#contact{text-align:center;position:relative;overflow:hidden;}
+.cg{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(56,189,248,.06) 0%,transparent 70%);pointer-events:none;}
+.cl{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--a);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:.8rem;}
+.cl::before,.cl::after{content:'';width:30px;height:1px;background:var(--a);}
+.ct{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,4.5rem);font-weight:800;color:var(--w);line-height:1.05;margin-bottom:1.5rem;letter-spacing:-.02em;}
+.cs{font-size:1rem;color:var(--muted);max-width:480px;margin:0 auto 3rem;line-height:1.8;}
+.cls{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.clk{font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.06em;padding:.85rem 1.6rem;border-radius:4px;border:1px solid var(--border);color:var(--muted);transition:all .25s;}
+.clk:hover{border-color:var(--a);color:var(--a);}
+.clk.pri{background:var(--a);border-color:var(--a);color:var(--bg);}
+.clk.pri:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(56,189,248,.35);}
+.clk.grn{border-color:var(--a3);color:var(--a3);}
+.clk.grn:hover{background:var(--a3);color:var(--bg);}
+/* FOOTER */
+footer{padding:1.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg);z-index:1;position:relative;}
+.ft{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.06em;}
+.ft span{color:var(--a);}
+/* REVEAL */
+.rev{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease;}
+.rev.show{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+@keyframes fu{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+/* RESPONSIVE */
+@media(max-width:1024px){.sg{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}.nls{display:none;}
+  .sec{padding:4.5rem 1.5rem;}#hero{padding:7rem 1.5rem 3rem;}
+  .ag,.teg,.eg{grid-template-columns:1fr;gap:2.5rem;}
+  .pg{grid-template-columns:1fr;}.pf{grid-column:auto;}
+  .aic{grid-template-columns:1fr 1fr;}.sg{grid-template-columns:repeat(2,1fr);}
+  .hst{gap:0;}.stat{padding:.8rem 1.5rem .8rem 0;border-right:none;border-bottom:1px solid var(--border);}
+  .stat:last-child{border-bottom:none;}.stat+.stat{padding-left:0;}
+  footer{flex-direction:column;gap:.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="ring"></div>
+<canvas id="cv"></canvas>
+
+<nav id="nav">
+  <div class="logo">AV<span>.</span></div>
+  <ul class="nls">
+    <li><a href="#about">about</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <div class="nr">
+    <a href="Anjana Vollala - Software_Engineer_Resume.pdf" download class="bres">⬇ Resume</a>
+    <a href="mailto:anjanavollala5@gmail.com" class="bcta">hire_me()</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hgrid"></div><div class="o1"></div><div class="o2"></div>
+  <p class="hey">Software Engineer · AI Systems · Quality Engineering</p>
+  <h1 class="hn">Anjana<span class="ol">Vollala<span class="ad">.</span></span></h1>
+  <div class="tw"><span style="color:var(--muted)">I build</span><span id="tel"></span></div>
+  <p class="hs">3+ years delivering <strong>TypeScript &amp; Python services</strong> on AWS &amp; Azure. Shipping fraud detection, RAG pipelines, and scalable APIs that handle <strong>millions of requests</strong> in production.</p>
+  <div class="hb">
+    <a href="#projects" class="bp">View Projects</a>
+    <a href="Anjana Vollala - Software_Engineer_Resume.pdf" download class="bg">⬇ Download Resume</a>
+    <a href="https://github.com/anjanavollala" target="_blank" class="bo">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/anjana-vollala" target="_blank" class="bo">LinkedIn ↗</a>
+  </div>
+  <div class="hst">
+    <div class="stat"><div class="sn"><span class="cu ac" data-t="3">0</span><span class="ac">+</span></div><div class="sl">Years Experience</div></div>
+    <div class="stat"><div class="sn"><span class="cu ac" data-t="8">0</span><span class="ac"> repos</span></div><div class="sl">GitHub Projects</div></div>
+    <div class="stat"><div class="sn"><span class="cu ac" data-t="41">0</span><span class="ac">%</span></div><div class="sl">Research Time Saved</div></div>
+    <div class="stat"><div class="sn"><span class="cu ac" data-t="90">0</span><span class="ac">%+</span></div><div class="sl">Model Reliability</div></div>
+  </div>
+  <div class="si"><span class="sit">scroll</span><div class="sil"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec sec-alt">
+  <div class="sh rev"><span class="se">01 //</span><h2 class="st">About Me</h2><div class="sl2"></div></div>
+  <div class="ag">
+    <div class="rev">
+      <p class="ap">I'm a <strong>Software Engineer</strong> with deep experience building AI-powered products from the ground up — and making sure they work correctly under pressure.</p>
+      <p class="ap">My work spans <strong>fraud detection systems</strong>, <strong>RAG pipelines</strong>, NLP extractors, deep learning models, and regulatory analytics platforms — all shipped with observability and quality gates baked in.</p>
+      <p class="ap">I'm drawn to AI products precisely because they break in interesting ways. Model drift, edge-case regressions, latency under load — I've built the pipelines that catch these before users see them. Currently at <strong>PwC</strong>. MS in CS from <strong>UT Arlington</strong>.</p>
+      <div class="chips">
+        <span class="chip hi">TypeScript</span><span class="chip hi">AI Quality Testing</span><span class="chip hi">RAG Systems</span>
+        <span class="chip">Python</span><span class="chip">React / Next.js</span><span class="chip">FastAPI / Django</span>
+        <span class="chip">AWS · Azure</span><span class="chip">Docker / K8s</span><span class="chip">Kafka</span>
+        <span class="chip">MLflow / Kubeflow</span><span class="chip">Playwright / Jest</span><span class="chip">Deep Learning</span>
+      </div>
+    </div>
+    <div class="rev d2 rw">
+      <canvas id="rc" width="320" height="300"></canvas>
+      <div class="rl" id="rl"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="sec">
+  <div class="sh rev"><span class="se">02 //</span><h2 class="st">Experience</h2><div class="sl2"></div></div>
+  <div class="tl">
+    <div class="tli rev">
+      <div class="tld act"></div>
+      <div class="tlh"><span class="tlc">PwC</span><span class="tlp">Jan 2025 – Present · Remote</span></div>
+      <div class="tlr">Software Engineer — AI &amp; Regulatory Analytics Platform</div>
+      <ul class="tlb">
+        <li>Led development of regulatory analytics dashboard using <strong>TypeScript, React &amp; FastAPI</strong>, reducing client onboarding time by <strong>25%</strong> supporting 150+ concurrent users.</li>
+        <li>Architected high-throughput <strong>fraud detection service</strong> on AWS ECS processing ~2M transactions daily — improving anomaly precision by <strong>26%</strong>.</li>
+        <li>Built <strong>RAG assistant</strong> using LlamaIndex + OpenAI embeddings — reducing audit research effort by <strong>41%</strong>.</li>
+        <li>Implemented <strong>GraphQL services</strong> in Docker on AWS ECS with GitHub Actions CI/CD.</li>
+        <li>Established model observability with Evidently AI + Prometheus, improving forecast stability by <strong>17%</strong>.</li>
+      </ul>
+      <div class="mr">
+        <span class="mp"><span class="v">25%</span> onboarding ↓</span>
+        <span class="mp"><span class="v">26%</span> fraud precision ↑</span>
+        <span class="mp"><span class="v">41%</span> research effort ↓</span>
+        <span class="mp"><span class="v">2M+</span> daily txns</span>
+      </div>
+    </div>
+    <div class="tli rev d1">
+      <div class="tld"></div>
+      <div class="tlh"><span class="tlc">Tata Consultancy Services</span><span class="tlp">Aug 2021 – Jul 2023 · Hyderabad</span></div>
+      <div class="tlr">Software Engineer — Claims Processing &amp; ML Platform</div>
+      <ul class="tlb">
+        <li>Designed <strong>claims processing portal in TypeScript &amp; React</strong> on Azure App Service, serving 200+ users — cutting manual entry by <strong>30%</strong>.</li>
+        <li>Architected event-driven microservices with <strong>Kafka on Kubernetes</strong> via Azure DevOps CI/CD.</li>
+        <li>Built <strong>NLP pipeline</strong> with Transformers for medical entity extraction — increasing eligibility detection by <strong>31%</strong>.</li>
+        <li>Implemented <strong>RAG framework</strong> with LangChain + vector indexing, cutting knowledge lookup time by <strong>37%</strong>.</li>
+        <li>Operationalized ML models via MLflow on AKS — sustaining reliability above <strong>90%</strong>.</li>
+      </ul>
+      <div class="mr">
+        <span class="mp"><span class="v">30%</span> manual entry ↓</span>
+        <span class="mp"><span class="v">31%</span> eligibility ↑</span>
+        <span class="mp"><span class="v">37%</span> lookup ↓</span>
+        <span class="mp"><span class="v">90%+</span> reliability</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS — ALL 8 REAL GITHUB REPOS -->
+<section id="projects" class="sec sec-alt">
+  <div class="sh rev"><span class="se">03 //</span><h2 class="st">GitHub Projects</h2><div class="sl2"></div></div>
+  <p class="rev" style="font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.08em;margin-bottom:2rem;">// 8 real repos · hover cards to flip · click GitHub ↗ to view source</p>
+  <div class="pg">
+
+    <!-- FEATURED: SmartHealthHub -->
+    <div class="pf rev" style="grid-column:span 2">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div class="ftg" style="margin-bottom:.5rem;">⭐ Featured · Healthcare · Full Stack · PHP/Laravel</div>
+          <div class="fnm" style="font-size:1.3rem;margin-bottom:.8rem;">SmartHealthHub</div>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;">Full-stack healthcare management platform built with PHP (Laravel) and Blade templating. Features patient record management, appointment scheduling, and health dashboards — showcasing end-to-end product engineering across the entire web stack.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.2rem;">
+            <span class="tg df">PHP 89.5%</span><span class="tg ai">Laravel</span><span class="tg df">Blade</span><span class="tg ts">JavaScript</span><span class="tg df">MySQL</span>
+          </div>
+          <a href="https://github.com/anjanavollala/SmartHealthHub1" target="_blank" class="ghl" style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--a);border:1px solid rgba(56,189,248,.3);padding:.35rem .9rem;border-radius:3px;display:inline-flex;align-items:center;gap:.4rem;">View on GitHub ↗</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;min-width:150px;">
+          <div style="padding:1rem;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);border-radius:5px;text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--a);">89.5%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);">PHP</div>
+          </div>
+          <div style="padding:1rem;background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.15);border-radius:5px;text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--a3);">Full</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);">Stack</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brain Tumor Detection -->
+    <div class="fc rev"><div class="fi">
+      <div class="ff">
+        <div class="fic">🧠</div>
+        <div class="ftg">Deep Learning · CNN · Medical AI</div>
+        <div class="fnm">Brain Tumor Detection</div>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.6;">CNN-based deep learning model to detect brain tumors from MRI scans.</p>
+        <div class="fhi">flip for details</div>
+      </div>
+      <div class="fb">
+        <div>
+          <div class="ftg">Deep Learning · Python</div>
+          <div class="fnm">Brain Tumor Detection</div>
+          <p class="fds">Convolutional Neural Network trained on MRI scan datasets to classify brain tumors. Practical deep learning applied to medical imaging — demonstrating AI for high-stakes diagnostics.</p>
+        </div>
+        <div>
+          <div class="fst"><span class="tg ai">CNN</span><span class="tg df">Python</span><span class="tg ai">Deep Learning</span><span class="tg ai">Medical AI</span></div>
+          <a href="https://github.com/anjanavollala/Brain-Tumor-Detection-using-DeepLearning" target="_blank" class="ghl">GitHub ↗</a>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- Disease Prediction -->
+    <div class="fc rev d1"><div class="fi">
+      <div class="ff">
+        <div class="fic">🏥</div>
+        <div class="ftg">ML · Scikit-learn · Healthcare</div>
+        <div class="fnm">Disease Prediction using ML</div>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.6;">Predicts diseases from symptoms using 3 ML algorithms with Tkinter GUI.</p>
+        <div class="fhi">flip for details</div>
+      </div>
+      <div class="fb">
+        <div>
+          <div class="ftg">ML · Python · Healthcare</div>
+          <div class="fnm">Disease Prediction using ML</div>
+          <p class="fds">Ensemble of Decision Tree, Random Forest, and Naive Bayes predicts diseases from user-entered symptoms. Tkinter GUI for interactive use. Demonstrates multi-model ML accuracy.</p>
+        </div>
+        <div>
+          <div class="fst"><span class="tg ai">Scikit-learn</span><span class="tg df">Python 100%</span><span class="tg df">Tkinter</span><span class="tg df">Pandas</span></div>
+          <a href="https://github.com/anjanavollala/Disease-Prediction-using-ML" target="_blank" class="ghl">GitHub ↗</a>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- Advanced Image Retrieval -->
+    <div class="fc rev d2"><div class="fi">
+      <div class="ff">
+        <div class="fic">🖼️</div>
+        <div class="ftg">Computer Vision · CIFAR-10 · Python</div>
+        <div class="fnm">Advanced Image Retrieval</div>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.6;">Content-based image retrieval system trained on CIFAR-10 dataset.</p>
+        <div class="fhi">flip for details</div>
+      </div>
+      <div class="fb">
+        <div>
+          <div class="ftg">Computer Vision · CIFAR-10</div>
+          <div class="fnm">Advanced Image Retrieval</div>
+          <p class="fds">Content-based image retrieval using deep feature extraction on CIFAR-10. Implements similarity search to retrieve visually similar images — foundation for visual search systems.</p>
+        </div>
+        <div>
+          <div class="fst"><span class="tg ai">Computer Vision</span><span class="tg df">Python 100%</span><span class="tg ai">CIFAR-10</span><span class="tg ai">CNN</span></div>
+          <a href="https://github.com/anjanavollala/Advanced-image-retrieval-system" target="_blank" class="ghl">GitHub ↗</a>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- Neural Networks -->
+    <div class="fc rev"><div class="fi">
+      <div class="ff">
+        <div class="fic">🔬</div>
+        <div class="ftg">Neural Networks · Deep Learning · Python</div>
+        <div class="fnm">Neural Networks</div>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.6;">Neural network implementations and experiments built from scratch.</p>
+        <div class="fhi">flip for details</div>
+      </div>
+      <div class="fb">
+        <div>
+          <div class="ftg">Neural Networks · Python</div>
+          <div class="fnm">Neural Networks</div>
+          <p class="fds">Hands-on neural network implementations covering architectures, backpropagation, and training strategies — built from scratch to understand core deep learning foundations.</p>
+        </div>
+        <div>
+          <div class="fst"><span class="tg ai">PyTorch</span><span class="tg df">Python</span><span class="tg ai">Deep Learning</span><span class="tg df">NumPy</span></div>
+          <a href="https://github.com/anjanavollala/Neural-Networks" target="_blank" class="ghl">GitHub ↗</a>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- E-Commerce Frontend -->
+    <div class="fc rev d1"><div class="fi">
+      <div class="ff">
+        <div class="fic">🛒</div>
+        <div class="ftg">Frontend · HTML · CSS · JavaScript</div>
+        <div class="fnm">E-Commerce Website</div>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.6;">Full e-commerce frontend: shop, cart, product pages, blog in pure HTML/CSS/JS.</p>
+        <div class="fhi">flip for details</div>
+      </div>
+      <div class="fb">
+        <div>
+          <div class="ftg">Frontend · HTML/CSS/JS</div>
+          <div class="fnm">E-Commerce Website</div>
+          <p class="fds">Complete multi-page e-commerce site: home, shop, product detail, cart, about, blog, and contact. Responsive design with shopping cart logic in vanilla JavaScript.</p>
+        </div>
+        <div>
+          <div class="fst"><span class="tg ts">HTML 80%</span><span class="tg df">CSS 19.6%</span><span class="tg ts">JavaScript</span><span class="tg df">Responsive</span></div>
+          <a href="https://github.com/anjanavollala/E-commerce-website-using-HTML-CSS-JS-Frontend" target="_blank" class="ghl">GitHub ↗</a>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- Two Phase Commit -->
+    <div class="fc rev d2"><div class="fi">
+      <div class="ff">
+        <div class="fic">🔗</div>
+        <div class="ftg">Distributed Systems · Python · Fault Tolerance</div>
+        <div class="fnm">2PC Protocol Simulation</div>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.6;">Fault-tolerant Two-Phase Commit with failure injection and persistent storage.</p>
+        <div class="fhi">flip for details</div>
+      </div>
+      <div class="fb">
+        <div>
+          <div class="ftg">Distributed Systems · Python</div>
+          <div class="fnm">2PC Protocol Simulation</div>
+          <p class="fds">Implements 2PC with 1 coordinator and multiple participants. Tests 4 failure scenarios: coordinator crash before prepare, participant decline, partial commit failure, and post-agree crash. Persistent storage for recovery.</p>
+        </div>
+        <div>
+          <div class="fst"><span class="tg df">Python 100%</span><span class="tg ai">Distributed Sys</span><span class="tg te">Fault Tolerance</span><span class="tg df">Sockets</span></div>
+          <a href="https://github.com/anjanavollala/Two-Phase-Commit-Protocol-Simulation" target="_blank" class="ghl">GitHub ↗</a>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- Stock Recording / QA -->
+    <div class="fc rev"><div class="fi">
+      <div class="ff">
+        <div class="fic">📋</div>
+        <div class="ftg">Software Engineering · QA · Management</div>
+        <div class="fnm">Stock Recording System</div>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.6;">SE Management, Maintenance and QA project with full documentation.</p>
+        <div class="fhi">flip for details</div>
+      </div>
+      <div class="fb">
+        <div>
+          <div class="ftg">Software Engineering · QA</div>
+          <div class="fnm">Stock Recording System</div>
+          <p class="fds">Academic SE project covering Software Engineering Management, QA processes, project scheduling with MS Project, and system maintenance documentation. Full SE lifecycle practice.</p>
+        </div>
+        <div>
+          <div class="fst"><span class="tg te">QA</span><span class="tg df">SE Management</span><span class="tg df">MS Project</span><span class="tg df">Documentation</span></div>
+          <a href="https://github.com/anjanavollala/Stock-Recording-System" target="_blank" class="ghl">GitHub ↗</a>
+        </div>
+      </div>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- AI FOCUS -->
+<section class="sec">
+  <div class="rev"><div class="aib">
+    <div class="abl">// AI Interest & Domain Fluency</div>
+    <h2 class="abt">Obsessed with How AI Products Fail — and How to Fix Them</h2>
+    <p class="abd">3 years shipping AI systems in production has taught me exactly where they break and how to surface it fast — from fraud detectors to deep learning medical models.</p>
+    <div class="aic">
+      <div class="acp"><div class="acpi">🎥</div><div class="acpt">Video AI Testing</div><p class="acpd">Evaluating generative outputs for consistency, prompt adherence, and temporal coherence.</p></div>
+      <div class="acp"><div class="acpi">🔄</div><div class="acpt">Model Drift Detection</div><p class="acpd">Evidently AI + Prometheus surfacing drift before users notice degradation.</p></div>
+      <div class="acp"><div class="acpi">📝</div><div class="acpt">Bug Reporting</div><p class="acpd">Clear reproduction steps, severity classification, and structured docs for cross-functional teams.</p></div>
+      <div class="acp"><div class="acpi">🔬</div><div class="acpt">Edge Case Discovery</div><p class="acpd">Finding exact conditions where models and interfaces behave unexpectedly.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec sec-alt">
+  <div class="sh rev"><span class="se">04 //</span><h2 class="st">Skills</h2><div class="sl2"></div></div>
+  <div class="sg" id="sg"></div>
+</section>
+
+<!-- TESTING -->
+<section id="testing" class="sec">
+  <div class="sh rev"><span class="se">05 //</span><h2 class="st">Testing Approach</h2><div class="sl2"></div></div>
+  <div class="teg">
+    <div class="rev">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:var(--w);margin-bottom:1rem;">Quality is an Engineering Discipline</h3>
+      <p class="tp">In AI systems, quality means understanding the full behavioral envelope — model behavior at boundaries, degradation under distribution shift, real failure modes for end users.</p>
+      <p class="tp">I bring software engineering rigor: systematic test case design, code-level investigation, and reproducible bug reporting that helps teams fix issues fast.</p>
+      <div class="fw"><span class="fwi">🎭</span><div><div class="fwn">Playwright (TypeScript)</div><div class="fwd">E2E; async flows, auth, visual regression</div></div></div>
+      <div class="fw"><span class="fwi">⚡</span><div><div class="fwn">Jest / PyTest / Vitest</div><div class="fwd">Unit and integration; snapshots, mocks, fixtures</div></div></div>
+      <div class="fw"><span class="fwi">🔁</span><div><div class="fwn">CI/CD Quality Gates</div><div class="fwd">GitHub Actions; automated runs, coverage gating</div></div></div>
+      <div class="fw"><span class="fwi">📈</span><div><div class="fwn">Model Observability</div><div class="fwd">Evidently AI + Prometheus + Grafana for AI health</div></div></div>
+    </div>
+    <div class="rev d1">
+      <div class="sp"><div class="spn">STEP 01</div><div class="spt">Understand the System Under Test</div><p class="spd">Study the codebase, trace data flows, identify assumptions. For AI products: understand training distribution and failure modes before writing a single test.</p></div>
+      <div class="sp"><div class="spn">STEP 02</div><div class="spt">Design Tests That Find Real Bugs</div><p class="spd">Happy-path tests are table stakes. I design around edge cases, adversarial inputs, latency boundaries, and behaviors product teams often miss.</p></div>
+      <div class="sp"><div class="spn">STEP 03</div><div class="spt">Document Findings for Action</div><p class="spd">Clear structured findings with steps to reproduce, expected vs. actual, severity, and investigation direction — not just "it broke."</p></div>
+      <div class="sp"><div class="spn">STEP 04</div><div class="spt">Close the Loop</div><p class="spd">Work cross-functionally to verify fixes, update coverage, and surface patterns that inform better design decisions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="sec sec-alt">
+  <div class="sh rev"><span class="se">06 //</span><h2 class="st">Education &amp; Certs</h2><div class="sl2"></div></div>
+  <div class="eg rev">
+    <div class="ec"><div class="es">University of Texas at Arlington</div><div class="ed">M.S. Computer Science</div><div class="ep">Aug 2023 – May 2025 · Texas, USA</div></div>
+    <div class="ec"><div class="es">MRIET — Hyderabad</div><div class="ed">B.E. Computer Science &amp; Engineering</div><div class="ep">Jul 2018 – Jul 2022 · India</div></div>
+  </div>
+  <div class="certs rev">
+    <span class="cert">Machine Learning with Python · IBM</span>
+    <span class="cert">Introduction to Cloud · IBM</span>
+    <span class="cert">Python 101 for Data Science</span>
+    <span class="cert">Text Summarization with Python</span>
+    <span class="cert">Flip the Script Challenge</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="cg"></div>
+  <div class="rev">
+    <p class="cl">let's connect</p>
+    <h2 class="ct">Ready to Build<br>Something Great?</h2>
+    <p class="cs">Open to contract and full-time roles in AI engineering, quality testing, and full-stack development. Arlington, TX — open to remote.</p>
+    <div class="cls">
+      <a href="mailto:anjanavollala5@gmail.com" class="clk pri">✉ anjanavollala5@gmail.com</a>
+      <a href="Anjana Vollala - Software_Engineer_Resume.pdf" download class="clk grn">⬇ Download Resume</a>
+      <a href="https://github.com/anjanavollala" target="_blank" class="clk">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/anjana-vollala" target="_blank" class="clk">LinkedIn ↗</a>
+      <a href="tel:+16825524849" class="clk">📞 +1 (682) 552-4849</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft">© 2025 Anjana Vollala · Arlington, TX</span>
+  <span class="ft">Python · TypeScript · Deep Learning · <span>open to work</span></span>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${mx-4}px,${my-4}px)`;});
+(function ar(){rx+=(mx-rx-16)*.1;ry+=(my-ry-16)*.1;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(ar);})();
+document.querySelectorAll('a,button,.fc,.pf,.acp,.sk').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px';ring.style.borderColor='rgba(56,189,248,.9)';ring.style.marginLeft='-8px';ring.style.marginTop='-8px';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(56,189,248,.5)';ring.style.marginLeft='0';ring.style.marginTop='0';});
+});
+
+/* PARTICLES */
+const canvas=document.getElementById('cv'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function rsz(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+rsz();window.addEventListener('resize',rsz);
+function Pt(){this.reset=function(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.r=Math.random()*1.2+.4;this.a=Math.random();};this.reset();this.update=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();};this.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(56,189,248,${this.a*.35})`;ctx.fill();};}
+for(let i=0;i<90;i++)pts.push(new Pt());
+(function ap(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.update();p.draw();});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<130){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(56,189,248,${.06*(1-d/130)})`;ctx.lineWidth=.5;ctx.stroke();}}requestAnimationFrame(ap);})();
+
+/* TYPING */
+const phrases=['production AI systems.','TypeScript services at scale.','RAG pipelines that work.','deep learning models.','quality-first engineering.','fraud detection pipelines.'];
+let pi=0,ci=0,del=false,pause=0;
+const tel=document.getElementById('tel');
+function tl(){if(pause>0){pause--;setTimeout(tl,50);return;}const w=phrases[pi];if(!del){tel.textContent=w.slice(0,++ci);if(ci===w.length){del=true;pause=40;}setTimeout(tl,ci===w.length?0:65);}else{tel.textContent=w.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;pause=12;}setTimeout(tl,38);}}
+tl();
+
+/* SCROLL REVEAL */
+const revEls=document.querySelectorAll('.rev');
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');ro.unobserve(e.target);}});},{threshold:.1});
+revEls.forEach(el=>ro.observe(el));
+
+/* COUNT UP */
+const cus=document.querySelectorAll('.cu');
+const co=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const t=+e.target.dataset.t;let c=0;const s=t/60;const tm=setInterval(()=>{c=Math.min(c+s,t);e.target.textContent=Math.round(c);if(c>=t)clearInterval(tm);},16);co.unobserve(e.target);}});},{threshold:.5});
+cus.forEach(c=>co.observe(c));
+
+/* NAV */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>50));
+document.querySelectorAll('section[id]').forEach(s=>{new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nls a').forEach(a=>a.classList.remove('act'));const a=document.querySelector(`.nls a[href="#${e.target.id}"]`);if(a)a.classList.add('act');}});},{threshold:.4}).observe(s);});
+
+/* RADAR */
+const rd=[{l:'TypeScript/JS',v:.88,c:'#60a5fa'},{l:'Python/AI',v:.92,c:'#38bdf8'},{l:'Deep Learning',v:.85,c:'#34d399'},{l:'Cloud/DevOps',v:.83,c:'#818cf8'},{l:'QA/Testing',v:.83,c:'#f472b6'},{l:'System Design',v:.80,c:'#fbbf24'}];
+document.getElementById('rl').innerHTML=rd.map(d=>`<div class="rli"><div class="rld" style="background:${d.c}"></div>${d.l}</div>`).join('');
+function drawR(p){const c=document.getElementById('rc'),cx=c.getContext('2d'),CX=160,CY=150,R=105,n=rd.length;cx.clearRect(0,0,320,300);for(let ring=1;ring<=5;ring++){cx.beginPath();for(let i=0;i<n;i++){const a=i*2*Math.PI/n-Math.PI/2,r2=R*ring/5;i===0?cx.moveTo(CX+r2*Math.cos(a),CY+r2*Math.sin(a)):cx.lineTo(CX+r2*Math.cos(a),CY+r2*Math.sin(a));}cx.closePath();cx.strokeStyle='rgba(255,255,255,.06)';cx.lineWidth=1;cx.stroke();}for(let i=0;i<n;i++){const a=i*2*Math.PI/n-Math.PI/2;cx.beginPath();cx.moveTo(CX,CY);cx.lineTo(CX+R*Math.cos(a),CY+R*Math.sin(a));cx.strokeStyle='rgba(255,255,255,.06)';cx.lineWidth=1;cx.stroke();}cx.beginPath();rd.forEach((d,i)=>{const a=i*2*Math.PI/n-Math.PI/2,r2=R*d.v*p;i===0?cx.moveTo(CX+r2*Math.cos(a),CY+r2*Math.sin(a)):cx.lineTo(CX+r2*Math.cos(a),CY+r2*Math.sin(a));});cx.closePath();cx.fillStyle='rgba(56,189,248,.09)';cx.fill();cx.strokeStyle='rgba(56,189,248,.65)';cx.lineWidth=2;cx.stroke();rd.forEach((d,i)=>{const a=i*2*Math.PI/n-Math.PI/2,r2=R*d.v*p;cx.beginPath();cx.arc(CX+r2*Math.cos(a),CY+r2*Math.sin(a),4,0,Math.PI*2);cx.fillStyle=d.c;cx.fill();cx.fillStyle='rgba(221,232,244,.65)';cx.font='10px DM Mono,monospace';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(d.l.split('/')[0],CX+(R+24)*Math.cos(a),CY+(R+24)*Math.sin(a));});}
+let rp=0,rs=false;
+new IntersectionObserver(es=>{if(es[0].isIntersecting&&!rs){rs=true;(function ra(){rp=Math.min(rp+.025,1);drawR(rp);if(rp<1)requestAnimationFrame(ra);})();}},{threshold:.3}).observe(document.getElementById('rc'));
+drawR(0);
+
+/* SKILL RINGS */
+const sd=[{n:'Python',c:'AI / ML',p:92,col:'#38bdf8'},{n:'TypeScript',c:'Frontend',p:88,col:'#60a5fa'},{n:'Deep Learning',c:'AI / ML',p:85,col:'#34d399'},{n:'React/Next.js',c:'Frontend',p:85,col:'#818cf8'},{n:'FastAPI',c:'Backend',p:90,col:'#38bdf8'},{n:'RAG / LLM',c:'AI / ML',p:90,col:'#38bdf8'},{n:'AWS / Azure',c:'Cloud',p:83,col:'#fbbf24'},{n:'Playwright',c:'Testing',p:83,col:'#f472b6'}];
+const sg=document.getElementById('sg');
+sd.forEach(s=>{sg.innerHTML+=`<div class="sk rev"><div class="sr"><svg viewBox="0 0 80 80"><circle class="srbg" cx="40" cy="40" r="36"/><circle class="srf" cx="40" cy="40" r="36" stroke="${s.col}" data-p="${s.p}"/></svg><div class="srv">${s.p}%</div></div><div class="skn">${s.n}</div><div class="skc">${s.c}</div></div>`;});
+document.querySelectorAll('.rev').forEach(el=>{if(!el.classList.contains('show'))ro.observe(el);});
+const CIRC=226;
+document.getElementById('sg').querySelectorAll('.sk').forEach(card=>{new IntersectionObserver(es=>{if(es[0].isIntersecting){es[0].target.querySelectorAll('.srf').forEach(f=>{f.style.strokeDashoffset=CIRC-(CIRC*+f.dataset.p/100);});}},{threshold:.3}).observe(card);});
+</script>
+</body>
+</html>
